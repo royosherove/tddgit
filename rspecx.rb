@@ -42,10 +42,10 @@ class TddGitRunner
           puts line 
           @commit_msg += line if copy_msg
           copy_msg = true    if line.match("^Failures:")
-          finished =  true   if line.match("Finished\ in\ \[0-9]+")
+          @finished =  true   if line.match("Finished\ in\ \[0-9]+")
         end
       rescue EOFError
-        if finished
+        if @finished
           puts "DONE DONE DONE!"
         end
       end
@@ -54,8 +54,8 @@ class TddGitRunner
   end
 
   def run
-    commit_msg = ""
-    finished = false
+    @commit_msg = ""
+    @finished = false
     run_rspec
     run_git_if_needed
   end
