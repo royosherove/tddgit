@@ -22,7 +22,7 @@ class TddGitRunner
           puts line 
         end
       rescue EOFError
-        if finished
+        if @finished
           puts "tddgit: commited"
         end
       end
@@ -30,7 +30,7 @@ class TddGitRunner
 
   end
   def run_rspec
-    finished = false
+    @finished = false
     copy_msg = false
     @commit_msg = ""
     status = 
