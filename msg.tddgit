@@ -1,6 +1,0 @@
-tddgit: auto-commit after rspec
-Failure/Error: 1.should == 2expected: 2
-            got: 1 (using ==)# ./specs.rb:4:in `block (2 levels) in <top (required)>'
-
-Finished in 0.00043 seconds
-1 example, 1 failure

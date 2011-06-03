@@ -6,7 +6,7 @@ require 'FileUtils'
 class TddGitRunner
 
   @commit_msg = ""
-  MSG_FILE = "msg.tddgit" 
+  MSG_FILE = ".git/msg.tddgit" 
 
   def make_commit_msg_file
     open(MSG_FILE, 'a') do |f|
