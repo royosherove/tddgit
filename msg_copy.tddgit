@@ -16,3 +16,4 @@ Failure/Error: 1.should == 2
 
 Finished in 0.00046 seconds
 1 example, 1 failure
+

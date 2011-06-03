@@ -28,6 +28,11 @@ class TddGitRunner
       end
       end
 
+    FileUtils.rm 'msg_copy'
+  end
+
+  def gitignore_msg
+
   end
   def run_rspec
     @finished = false
