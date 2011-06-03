@@ -1,19 +1,2 @@
-Failure/Error: 1.should == 2expected: 2
-            got: 1 (using ==)# ./specs.rb:4:in `block (2 levels) in <top (required)>'
-
-Finished in 0.00042 seconds
-1 example, 1 failure
-
-Failure/Error: 1.should == 2
-       expected: 2
-            got: 1 (using ==)# ./specs.rb:4:in `block (2 levels) in <top (required)>'
-
-Finished in 0.00043 seconds
-1 example, 1 failure
-Failure/Error: 1.should == 2
-       expected: 2
-            got: 1 (using ==)# ./specs.rb:4:in `block (2 levels) in <top (required)>'
-
-Finished in 0.00046 seconds
-1 example, 1 failure
-
+tddgit: auto-commit after rspec
+Failure/Error: 1.should == 2expected: 2got: 1 (using ==)# ./specs.rb:4:in `block (2 levels) in <top (required)>'Finished in 0.00048 seconds1 example, 1 failure
