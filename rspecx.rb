@@ -6,16 +6,22 @@ require 'FileUtils'
 class TddGitRunner
 
   @commit_msg = ""
-    
-  def run_git_if_needed
-    open('msg_copy.tddgit', 'a') do |f|
+  MSG_FILE = "msg.tddgit" 
+
+  def make_commit_msg_file
+    open(MSG_FILE, 'a') do |f|
       f.puts "tddgit: auto-commit after rspec"
       f.puts @commit_msg
     end
+  end
+
+  def run_git_if_needed
     status = 
       Open4::popen4("sh") do |pid, stdin, stdout, stderr|
       puts "tddgit: auto-committing.."
-      stdin.puts "git add . && git commit -F msg_copy.tddgit"
+      stdin.puts "git add ."
+      make_commit_msg_file
+      stdin.puts "git commit -F #{MSG_FILE}"
       stdin.close
       begin
         while ((line = stdout.readpartial(10240).strip))
@@ -28,7 +34,7 @@ class TddGitRunner
       end
       end
 
-    FileUtils.rm 'msg_copy.tddgit'
+    FileUtils.rm MSG_FILE
   end
 
   def gitignore_msg
