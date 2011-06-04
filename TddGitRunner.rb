@@ -1,5 +1,4 @@
 require 'open4'
-require 'FileUtils'
 require 'grit'
 
 
