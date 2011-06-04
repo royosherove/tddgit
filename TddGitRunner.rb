@@ -54,13 +54,6 @@ class TddGitRunner
   end
 
   def run
-    @total_specs = 0
-    @failures= 0
-    @pending = 0
-    @rspec_output = ""
-    @commit_msg = ""
-    @finished = false
-
     output = run_rspec
     msg = collect_data(output)
     run_git_if_needed (msg)
