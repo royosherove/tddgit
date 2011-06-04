@@ -50,6 +50,7 @@ class TddGitRunner
 
   def collect_data
     unless @rspec_output =~ /([0-9]+)\ examples,\ ([0-9]+)\ failures?,\ ([0-9]+)\ pending/
+      puts "NOT FOUBD MATCH"
        debugger
         true
     end
