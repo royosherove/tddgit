@@ -11,10 +11,10 @@ class TddGitRunner
   @skipped= 0
   @rspec_output = ""
 
-  def run_git_if_needed
+  def run_git_if_needed(msg)
     repo = Grit::Repo.new('.')
     repo.add(".")
-    repo.commit_index(@commit_msg)
+    repo.commit_index(msg)
     puts "=========tddgit============"
     puts repo.log('master',nil,{:max_count => 1}).first.message
     puts "==========================="
@@ -70,7 +70,7 @@ class TddGitRunner
     @commit_msg = ""
     @finished = false
     run_rspec
-    collect_data
-    run_git_if_needed
+    msg = collect_data
+    run_git_if_needed (msg)
   end
 end
