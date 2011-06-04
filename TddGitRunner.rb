@@ -1,5 +1,6 @@
 require 'open4'
 require 'FileUtils'
+require 'grit'
 
 
 class TddGitRunner
@@ -36,7 +37,7 @@ class TddGitRunner
     FileUtils.rm MSG_FILE
   end
 
-  def run_git_if_needed
+  def run_git_if_needed_old
     run_child_process("sh") do |stdin, stdout, stderr|
       puts "tddgit: auto-committing.."
       make_commit_msg_file
@@ -44,6 +45,12 @@ class TddGitRunner
       stdin.puts "git commit -F #{MSG_FILE}"
     end
     FileUtils.rm MSG_FILE
+  end
+
+  def run_git_if_needed
+    repo = Grit::Repo.new('.')
+    repo.add(".")
+    repo.commit_index(@commit_msg)
   end
 
   def run_child_process(name)
@@ -64,6 +71,7 @@ class TddGitRunner
     @finished = false
     copy_msg = false
     @commit_msg = ""
+    @commit_msg+= "tddgit: auto-commit after rspec"
     status = 
       Open4::popen4("sh") do |pid, stdin, stdout, stderr|
       stdin.puts "rspec "+ ARGV.join(' ')
