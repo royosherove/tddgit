@@ -51,7 +51,7 @@ class TddGitRunner
     repo = Grit::Repo.new('.')
     repo.add(".")
     repo.commit_index(@commit_msg)
-    puts repo.log('master',nil,{:max_count => 1}).first.commit_message
+    puts repo.log('master',nil,{:max_count => 1}).first.message
   end
 
   def run_child_process(name)
