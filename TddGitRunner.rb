@@ -49,7 +49,7 @@ class TddGitRunner
   end
 
   def collect_data
-    @rspec_output =~ /^([0-9]+)\ examples,\ ([0-9]+)\ failures/
+    @rspec_output =~ /([0-9]+)\ examples,\ ([0-9]+)\ failures/
     @total_specs = $1.to_i
     @failures= $2.to_i
     @commit_msg = "tddgit: all good" if @failures == 0
