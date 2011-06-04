@@ -53,7 +53,7 @@ class TddGitRunner
     @total_specs = $1.to_i
     @failures= $2.to_i
     @commit_msg = "tddgit: all good" if @failures == 0
-    @commit_msg = "tddgit: #{@failures} of #{@total_specs} failed" if @failures > 0
+    @commit_msg = "tddgit: #{@failures} failed of #{@total_specs}" if @failures > 0
   end
 
   def run

@@ -1,5 +1,6 @@
 require 'rspec'
 describe "something else" do
+  it "does empty"
   it "does something else" do
     1.should == 1
   end
