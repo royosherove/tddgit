@@ -4,12 +4,6 @@ require 'grit'
 
 class TddGitRunner
 
-  @commit_msg = ""
-  @had_errors = false
-  @failures= 0
-  @pending =  0
-  @skipped= 0
-  @rspec_output = ""
 
   def run_git_if_needed(msg)
     repo = Grit::Repo.new('.')
