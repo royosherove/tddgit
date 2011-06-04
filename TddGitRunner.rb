@@ -77,7 +77,7 @@ class TddGitRunner
         end
       rescue EOFError
         if @finished
-          puts "DONE DONE DONE!"
+          puts "tddgit: rspec done detected"
         end
       end
       end
