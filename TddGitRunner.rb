@@ -8,6 +8,7 @@ class TddGitRunner
   @commit_msg = ""
   @had_errors = false
   @failures= 0
+  @pending =  0
   @skipped= 0
   @rspec_output = ""
 
@@ -49,11 +50,12 @@ class TddGitRunner
   end
 
   def collect_data
-    @rspec_output =~ /([0-9]+)\ examples,\ ([0-9]+)\ failure/
+    @rspec_output =~ /([0-9]+)\ examples,\ ([0-9]+)\ failures?,\ ([0-9]+)\ pending/
     @total_specs = $1.to_i
     @failures= $2.to_i
+    @pending = $3.to_i
     @commit_msg = "tddgit: all good" if @failures == 0
-    @commit_msg = "tddgit: #{@failures} failed of #{@total_specs}" if @failures > 0
+    @commit_msg = "tddgit: #{@failures} failed of #{@total_specs} with #{@pending} pending." if @failures > 0
   end
 
   def run
