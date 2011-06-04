@@ -51,6 +51,7 @@ class TddGitRunner
     repo = Grit::Repo.new('.')
     repo.add(".")
     repo.commit_index(@commit_msg)
+    puts "XXXXXXXXXXXXXXXX"
     puts repo.log('master',nil,{:max_count => 1}).first.message
   end
 
