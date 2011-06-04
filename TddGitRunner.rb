@@ -49,7 +49,10 @@ class TddGitRunner
   end
 
   def collect_data
-    @rspec_output =~ /([0-9]+)\ examples,\ ([0-9]+)\ failures?,\ ([0-9]+)\ pending/
+    unless @rspec_output =~ /([0-9]+)\ examples,\ ([0-9]+)\ failures?,\ ([0-9]+)\ pending/
+       debugger
+        true
+    end
     @total_specs = $1.to_i
     @failures= $2.to_i
     @pending = $3.to_i
