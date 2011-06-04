@@ -22,34 +22,31 @@ class TddGitRunner
 
 
   def run_rspec
-    @finished = false
-    copy_msg = false
-    @commit_msg = ""
-    @commit_msg+= "tddgit: auto-commit after rspec"
+    output = ""
     status = 
       Open4::popen4("sh") do |pid, stdin, stdout, stderr|
       stdin.puts "rspec "+ ARGV.join(' ')
       stdin.close
       begin
         while ((line = stderr.readpartial(10240).strip))
-          @had_errors = true
           puts line 
+          output+= line
         end
       rescue EOFError
       end
       begin
           while ((line = stdout.readpartial(10240).strip))
             puts line 
-            @rspec_output += line
-            @finished =  true   if line.match("Finished\ in\ \[0-9]+")
+            output += line
           end
         rescue EOFError
         end
       end
+    output
   end
 
-  def collect_data
-    unless @rspec_output =~ /([0-9]+)\ examples,\ ([0-9]+)\ failures?,\ ([0-9]+)\ pending/
+  def collect_data(log)
+    unless log =~ /([0-9]+)\ examples,\ ([0-9]+)\ failures?,\ ([0-9]+)\ pending/
       puts "NOT FOUBD MATCH"
        debugger
         true
@@ -69,8 +66,9 @@ class TddGitRunner
     @rspec_output = ""
     @commit_msg = ""
     @finished = false
-    run_rspec
-    msg = collect_data
+
+    output = run_rspec
+    msg = collect_data(output)
     run_git_if_needed (msg)
   end
 end
