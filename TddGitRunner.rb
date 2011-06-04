@@ -62,6 +62,9 @@ class TddGitRunner
   end
 
   def run
+    @total_specs = 0
+    @failures= 0
+    @pending = 0
     @rspec_output = ""
     @commit_msg = ""
     @finished = false
