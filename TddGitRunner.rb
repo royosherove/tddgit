@@ -15,38 +15,6 @@ class TddGitRunner
     end
   end
 
-  def run_git_if_needed_old
-    status = 
-      Open4::popen4("sh") do |pid, stdin, stdout, stderr|
-      puts "tddgit: auto-committing.."
-      make_commit_msg_file
-      stdin.puts "git add ."
-      stdin.puts "git commit -F #{MSG_FILE}"
-      stdin.close
-      begin
-        while ((line = stdout.readpartial(10240).strip))
-          puts line 
-        end
-      rescue EOFError
-        if @finished
-          puts "tddgit: commited"
-        end
-      end
-      end
-
-    FileUtils.rm MSG_FILE
-  end
-
-  def run_git_if_needed_old
-    run_child_process("sh") do |stdin, stdout, stderr|
-      puts "tddgit: auto-committing.."
-      make_commit_msg_file
-      stdin.puts "git add ."
-      stdin.puts "git commit -F #{MSG_FILE}"
-    end
-    FileUtils.rm MSG_FILE
-  end
-
   def run_git_if_needed
     repo = Grit::Repo.new('.')
     repo.add(".")
@@ -78,6 +46,14 @@ class TddGitRunner
       Open4::popen4("sh") do |pid, stdin, stdout, stderr|
       stdin.puts "rspec "+ ARGV.join(' ')
       stdin.close
+      begin
+        while ((line = stderr.readpartial(10240).strip))
+          puts line 
+        end
+      rescue EOFError
+        if @finished
+        end
+      end
       begin
         while ((line = stdout.readpartial(10240).strip))
           puts line 
