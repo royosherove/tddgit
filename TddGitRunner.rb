@@ -54,11 +54,12 @@ class TddGitRunner
        debugger
         true
     end
-    @total_specs = $1.to_i
-    @failures= $2.to_i
-    @pending = $3.to_i
-    @commit_msg = "tddgit: all good" if @failures == 0
-    @commit_msg = "tddgit: #{@failures} failed of #{@total_specs} with #{@pending} pending." if @failures > 0
+    total_specs = $1.to_i
+    failures= $2.to_i
+    pending = $3.to_i
+    commit_msg = "tddgit: all good" if failures == 0
+    commit_msg = "tddgit: #{failures} failed of #{total_specs} with #{pending} pending." if failures > 0
+    commit_msg
   end
 
   def run
